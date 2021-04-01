@@ -3,7 +3,6 @@
 *.classpath
 *.cmd
 
-
 # Log file
 *.log
 
@@ -36,3 +35,6 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+*.project
+.mvnw
+
