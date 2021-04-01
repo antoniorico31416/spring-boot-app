@@ -36,6 +36,7 @@ local.properties
 .loadpath
 .recommenders
 *.project
-.mvnw
+.mvn/
+*.MF
 
-news-feed/target/classes/META-INF/MANIFEST.MF
+news-feed/mvnw
