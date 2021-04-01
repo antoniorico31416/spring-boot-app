@@ -38,3 +38,4 @@ local.properties
 *.project
 .mvnw
 
+news-feed/target/classes/META-INF/MANIFEST.MF
