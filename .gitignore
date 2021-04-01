@@ -39,5 +39,6 @@ local.properties
 .mvn/
 *.MF
 .target/
+*/target/*
 
 news-feed/mvnw
