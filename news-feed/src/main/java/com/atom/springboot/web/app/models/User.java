@@ -1,25 +1,27 @@
 package com.atom.springboot.web.app.models;
 
+import java.util.UUID;
+
 public class User {
 	
-	private long id;
+	private UUID id;
 	private String userName;
 	private String email;
 	
 	
-	public User(long id, String userName, String email) {
+	public User(UUID id, String userName, String email) {
 		this.id = id;
 		this.userName = userName;
 		this.email = email;
 	}
 
 
-	public long getId() {
+	public UUID getId() {
 		return id;
 	}
 
 
-	public void setId(long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
