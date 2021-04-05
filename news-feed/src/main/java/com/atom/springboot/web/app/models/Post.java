@@ -1,28 +1,32 @@
 package com.atom.springboot.web.app.models;
 
+import java.util.UUID;
+
 public class Post {
 	
-	private long id;
-	private long userId;
+	private UUID id;
+	private UUID userId;
 	private String content; 
 
-	public Post() {
-		
+	public Post(UUID id, UUID userId, String content) {
+		this.id = id;
+		this.userId = userId;
+		this.content = content;
 	}
 
-	public long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
-	public long getUserId() {
+	public UUID getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(UUID userId) {
 		this.userId = userId;
 	}
 
