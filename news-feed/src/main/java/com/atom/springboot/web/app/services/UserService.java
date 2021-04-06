@@ -1,5 +1,8 @@
 package com.atom.springboot.web.app.services;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,8 +19,16 @@ public class UserService {
 		this.userDao = userDao;
 	}
 	
-	public int addUser(User user) {
-		return userDao.addUser(user);
+	public UUID addUser(User user) {
+		return userDao.insertUser(user);
+	}
+	
+	public List<User> getAllUsers(){
+		return userDao.getUsers();
+	}
+	
+	public User getUser(UUID id) {
+		return userDao.getUser(id);
 	}
 
 	

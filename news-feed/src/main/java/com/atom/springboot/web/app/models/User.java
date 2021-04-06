@@ -26,10 +26,14 @@ public class User {
 		this.userName = userName;
 		this.email = email;
 	}
+	
+	public User() {
+		
+	}
 
 
 	public UUID getId() {
-		return id;
+		return this.id;
 	}
 
 
@@ -39,7 +43,7 @@ public class User {
 
 
 	public String getUserName() {
-		return userName;
+		return this.userName;
 	}
 
 
@@ -49,7 +53,7 @@ public class User {
 
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 

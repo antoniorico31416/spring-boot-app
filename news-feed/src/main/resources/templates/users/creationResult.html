@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="ISO-8859-1">
+<title>Users</title>
+</head>
+<body>
+	<h1>User Creation</h1>
+	<h2 th:text=${message}></h2>
+	<div th:if="${user != null}">
+		<p>
+			User Id: <span th:text="${user.id}"></span>.
+		</p>
+		<p>
+			UserName: <span th:text="${user.userName}"></span>.
+		</p>
+		<p>
+			Email: <span th:text="${user.email}"></span>.
+		</p>
+	</div>
+</body>
+</html>
