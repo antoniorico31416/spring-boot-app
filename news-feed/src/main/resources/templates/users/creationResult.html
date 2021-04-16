@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<head xmlns:th="http://www.thymeleaf.org">
-<meta charset="ISO-8859-1">
-<title>Users</title>
+<head th:replace="fragments/head :: base_head('User Creation')">
+<meta charset="ISO-8859-1">S
 </head>
-<body>
-	<h1>User Creation</h1>
-	<h2 th:text=${message}></h2>
-	<div th:if="${user != null}">
-		<p>
-			User Id: <span th:text="${user.id}"></span>.
-		</p>
-		<p>
-			UserName: <span th:text="${user.userName}"></span>.
-		</p>
-		<p>
-			Email: <span th:text="${user.email}"></span>.
-		</p>
+<body th:replace="fragments/body :: body(~{::div#creation-result})">
+	<div id="creation-result">
+		<h2 th:text=${message}></h2>
+		<div th:if="${user != null}">
+			<p>
+				User Id: <span th:text="${user.id}"></span>.
+			</p>
+			<p>
+				UserName: <span th:text="${user.userName}"></span>.
+			</p>
+			<p>
+				Email: <span th:text="${user.email}"></span>.
+			</p>
+		</div>
 	</div>
 </body>
 </html>

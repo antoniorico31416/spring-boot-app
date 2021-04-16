@@ -22,14 +22,15 @@ public class DataAccessService implements UserDao, PostDao {
 	private static HashMap<UUID, Post> DB_Posts = new HashMap<>();
 	
 	@Override
-	public int insertUser(UUID id, User user) {
-		if(userExists(user.getUserName()) || userExists(id)) {
-			return 0;
+	public UUID insertUser(User user) {
+		if(userExists(user.getUserName())) {
+			return null;
 		}
 		//Add user to DB
+		UUID id = UUID.randomUUID();
 		User newUser = new User(id, user.getUserName(), user.getEmail());
 		DB_Users.put(id, newUser);
-		return 1;
+		return id;
 	}
 	
 	public boolean userExists(String userName) {
@@ -49,19 +50,40 @@ public class DataAccessService implements UserDao, PostDao {
 		}
 		return false;
 	}
+	
+	public List<User> getUsers(){
+		if(DB_Users.size() > 0) {
+			List<User> users = new ArrayList<User>(DB_Users.values());
+			return users;
+		}
+		return null;
+	}
+	
+	@Override
+	public User getUser(UUID id) {
+		User user = DB_Users.get(id);
+		return user;
+	}
 
 	
 	//Post Dao methods 
 	@Override
-	public int insertPost(UUID id, Post post) {
+	public int insertPost(Post post) {
 		//Check if user exists
 		if(userExists(post.getUserId())) {
 			return 0;
 		}
 		//Add user to DB
+		UUID id = UUID.randomUUID();
 		Post newPost = new Post(id, post.getUserId(), post.getContent());
 		DB_Posts.put(id, newPost);
 		return 1;
 	}
+
+	@Override
+	public boolean hasUsers() {
+		return DB_Posts.size() > 0;
+	}
+
 
 }

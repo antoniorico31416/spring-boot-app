@@ -30,14 +30,14 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/userForm")
+	@GetMapping("/create")
 	public String createUser(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "users/formUser";
 	}
 	
-	@PostMapping(path="/create")
+	@PostMapping("/create")
 	public String addUser(User user, Model model) {
 		UUID id = userService.addUser(user);
 		User currentUser = userService.getUser(id);

@@ -18,7 +18,11 @@ private final PostDao postDao;
 	}
 	
 	public int addPost(Post post) {
-		return postDao.addUser(post);
+		return postDao.insertPost(post);
+	}
+	
+	public boolean hasUsers() {
+		return postDao.hasUsers();
 	}
 
 }
