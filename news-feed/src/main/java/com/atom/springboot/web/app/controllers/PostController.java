@@ -24,25 +24,6 @@ public class PostController {
 		this.postService = postService;
 	}
 	
-	@GetMapping("/postForm")
-	public String createPostForm(Model model) {
-		
-		if(postService.hasUsers()) {
-			return "posts/formPost";
-		}
-		
-		return "posts/formPost";
-	}
-	
-	@PostMapping(path="/create")
-	public String createPost(@RequestBody Post post, Model model) {
-		postService.addPost(post);
-		model.addAttribute("post", post);
-		
-		
-		return "postResult";
-	}
-	
 	@GetMapping("/all")
 	public String showAllPosts(Model model) {
 		//model.addAttribute("posts", );

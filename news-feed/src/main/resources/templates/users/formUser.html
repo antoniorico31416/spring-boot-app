@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: base_head('New User')">
-<meta charset="ISO-8859-1">S
-</head>
-<body th:replace="fragments/body :: body(~{::div#form-user})">
-	<div class="form" id="form-user">
-		<h1>Create New User</h1>
-		<form th:action="@{create}" method="post" th:object="${user}">
-			<div>
-				<label for="userName">Username: </label>
-				<div>
-					<input type="text" id="userName" th:field=*{userName}
-						name="userName">
-				</div>
-			</div>
-
-			<div>
-				<label for="email">Email: </label>
-				<div>
-					<input type="text" id="email" th:field=*{email} name="email">
-				</div>
-			</div>
-
-			<div>
-				<button type="submit">Create User</button>
-			</div>
-				
-			
-
-		</form>
-	</div>
-</body>
+   <head th:replace="fragments/head :: base_head('New User')">
+      <meta charset="ISO-8859-1">
+      
+   </head>
+   <body th:replace="fragments/body :: body(~{::div#form-user})">
+      <div class="form" id="form-user">
+         <h1>Create New User</h1>
+         <form th:action="@{create}" method="post" th:object="${user}">
+            <div class="form-group">
+               <label for="fullName">Full Name: </label>
+               <input type="text" class="form-control" id="fullName" th:field=*{fullName} name="fullName">
+            </div>
+            <div class="form-group">
+               <label for="userName">Username: </label>
+               <input type="text" class="form-control" id="userName" th:field=*{userName} name="userName">
+            </div>
+            <div class="form-group">
+               <label for="password">Password: </label>
+               <input type="password" class="form-control" id="password" th:field=*{password} name="password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+         </form>
+      </div>
+   </body>
 </html>

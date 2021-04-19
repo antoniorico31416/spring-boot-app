@@ -1,32 +1,48 @@
 package com.atom.springboot.web.app.models;
 
-import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="post")
 public class Post {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "post_id")
+	private Integer id;
 	
-	private UUID id;
-	private UUID userId;
+	@Column(name = "user_id")
+	private Integer userId;
+	
+	@Column(name = "content")
 	private String content; 
+	
+	@Column(name = "creation_date")
+	private String creationDate;
 
-	public Post(UUID id, UUID userId, String content) {
+	public Post(Integer id, Integer userId, String content) {
 		this.id = id;
 		this.userId = userId;
 		this.content = content;
 	}
 
-	public UUID getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public UUID getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -36,6 +52,14 @@ public class Post {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 	
 	

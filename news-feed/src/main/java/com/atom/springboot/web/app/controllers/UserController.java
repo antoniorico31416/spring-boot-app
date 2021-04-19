@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,17 +40,16 @@ public class UserController {
 	
 	@PostMapping("/create")
 	public String addUser(User user, Model model) {
-		UUID id = userService.addUser(user);
-		User currentUser = userService.getUser(id);
+		User userCreated = userService.addUser(user);
 		String message = "";
-		if(id != null) {
+		if(userCreated != null) {
 			message = "User created";
 		}
 		else {
-			message = "The User " + user.getUserName() + " already exists";
+			message = "The User '" + user.getUserName() + "' already exists";
 		}
 		model.addAttribute("message", message);
-		model.addAttribute("user", currentUser);
+		model.addAttribute("user", userCreated);
 		return "users/creationResult";
 	}
 	
@@ -58,6 +58,23 @@ public class UserController {
 		List<User> users = userService.getAllUsers();
 		model.addAttribute("users", users);
 		return "users/allUsers";
+	}
+	
+	@GetMapping("/unfollowed")
+	public String getUnfollowed(Model model) {
+		String userName = "atom";
+		List<User> users = userService.getUnfollowed(userName);
+		if(users != null) {
+			
+		}
+		model.addAttribute("users", users);
+		return "users/allUsers";
+	}
+	
+	@GetMapping(value = "follow/{userName}")
+	public String followUser(@PathVariable("userName")String userName, Model model) {
+		
+		return "";
 	}
 
 }

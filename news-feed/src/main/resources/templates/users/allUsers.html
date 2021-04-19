@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head th:replace="fragments/head :: base_head('All Users')">
+   <meta charset="ISO-8859-1">
+   S
+</head>
+<body th:replace="fragments/body :: body(~{::div#all-users})">
+   <div id="all-users">
+      <h2>All Users</h2>
+      <div class="list-group" th:if="${users != null}" th:each="user : ${users}">
+         <button type="button" class="list-group-item list-group-item-action" th:text="${user.userName}"></button>
+      </div>
+      </div>
+      <div th:unless="${users == null}">
+         <h3>No users available</h3>
+      </div>
+   </div>
+</body>
+</html>

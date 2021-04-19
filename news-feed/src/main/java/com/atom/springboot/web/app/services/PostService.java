@@ -4,25 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.atom.springboot.web.app.dao.PostDao;
-import com.atom.springboot.web.app.models.Post;
+import com.atom.springboot.web.app.models.Post; 	
+import com.atom.springboot.web.app.repository.PostRepository;
 
 @Service
 public class PostService {
 	
-private final PostDao postDao;
+private final PostRepository postRepository;
 	
 	@Autowired
-	public PostService(@Qualifier("dataAccessFake") PostDao postDao) {
-		this.postDao = postDao;
+	public PostService(PostRepository postRepository) {
+		this.postRepository = postRepository;
 	}
 	
-	public int addPost(Post post) {
-		return postDao.insertPost(post);
-	}
-	
-	public boolean hasUsers() {
-		return postDao.hasUsers();
+	public Post addPost(Post post) {
+		return postRepository.save(post);
 	}
 
 }
