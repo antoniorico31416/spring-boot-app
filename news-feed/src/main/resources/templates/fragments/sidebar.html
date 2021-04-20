@@ -5,18 +5,23 @@
 		<!-- Sidebar Holder -->
 		<nav id="sidebar" th:fragment="frag_sidebar">
 			<div class="sidebar-header">
-				<h3>News Feed</h3>
+				<h3><a th:href="@{~/}">News Feed</a></h3>
+				<p>Current User: </p>
 			</div>
 
 			<ul class="list-unstyled components">
-				<li class="active"><a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Users</a>
+				<li class="active"><a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Profile</a>
 					<ul class="collapse list-unstyled" th:id="homeSubmenu1">
 						<li><a th:href="@{~/app/user/create}">Create User</a></li>
-						<li><a href="#">List Users</a></li>
+						<li><a th:href="@{~/app/user/all}">List Users</a></li>
+						<li><a th:href="@{~/app/user/listUnFollowed}">Follow user</a></li>
+						<li><a th:href="@{~/app/user/listFollowed}">Followed users</a></li>
 					</ul></li>
 				<li class="active"><a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Posts</a>
 					<ul class="collapse list-unstyled" th:id="homeSubmenu2">
-						<li><a href="#">Create Post</a></li>
+						<li><a th:href="@{/}">Create Post</a></li>
+						<li><a th:href="@{/}">Show your posts</a></li>
+						<li><a th:href="@{/}">Show followed posts</a></li>
 					</ul></li>
 		</nav>
 

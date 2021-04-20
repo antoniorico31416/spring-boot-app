@@ -4,6 +4,7 @@ import com.atom.springboot.web.app.models.User;
 import com.atom.springboot.web.app.services.UserService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,12 @@ public class UserController {
 	
 	//Create an instance of service
 	private final UserService userService;
+	private Optional<User> currentUser;
 	
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
+		this.currentUser = userService.getUserById(1);
 	}
 	
 	@GetMapping("/create")
@@ -56,6 +59,7 @@ public class UserController {
 	@GetMapping("/all")
 	public String showAllUsers(Model model) {
 		List<User> users = userService.getAllUsers();
+		
 		model.addAttribute("users", users);
 		return "users/allUsers";
 	}
@@ -68,13 +72,40 @@ public class UserController {
 			
 		}
 		model.addAttribute("users", users);
-		return "users/allUsers";
+		return "users/listUsers";
 	}
 	
-	@GetMapping(value = "follow/{userName}")
-	public String followUser(@PathVariable("userName")String userName, Model model) {
+	@GetMapping("/listUnFollowed")
+	public String followUser(Model model) {
 		
-		return "";
+		//List<User> users = null;
+		List<User> users = userService.getAllUsers();
+		if(currentUser.isPresent()) {
+			User user = currentUser.get();
+			//users = userService.getUnfollowed(user.getUserName());
+		}
+		model.addAttribute("users", users);
+		return "users/listUsers";
+	}
+	
+	@PostMapping("/follow")
+	public String followUsers(@RequestParam(value = "userName") String userName, Model model) {
+		System.out.println("------->" + userName);
+		User user = currentUser.get();
+		userService.followUser(user.getUserName(),userName);
+		return "index";
+	}
+	
+	@GetMapping("/listFollowed")
+	public String followrdUsers(Model model) {
+		List<User> users = null;
+		
+		if(currentUser.isPresent()) {
+			User user = currentUser.get();
+			users = userService.getFollowed(user.getUserName());
+		}
+		model.addAttribute("users", users);
+		return "users/listUsers";
 	}
 
 }

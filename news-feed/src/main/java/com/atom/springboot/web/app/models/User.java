@@ -25,7 +25,6 @@ public class User {
 	private String fullName;
 
 
-
 	public User(String userName, String password, String fullName) {
 		this.userName = userName;
 		this.password = password;

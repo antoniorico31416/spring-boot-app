@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head th:replace="fragments/head :: base_head('News Feed')">
+   <meta charset="ISO-8859-1">
+</head>
+<body th:replace="fragments/body :: body(~{::div#all-users})">
+   <div id="all-users">
+      <h2>Followed Users</h2>
+	      <form th:action="@{../user/follow}" method="post">
+		      <div class="list-group" th:if="${users != null}" th:each="user : ${users}">
+		      	<button type="submit" class="list-group-item list-group-item-action" th:text="${user.userName}" th:value="${user.userName}" th:name="userName"></button>
+				
+		      </div>
+	      </form>
+      </div>
+      <div th:unless="${users == null}">
+         <h3>No users available</h3>
+      </div>
+   </div>
+</body>
+</html>
