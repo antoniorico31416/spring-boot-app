@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.atom.springboot.web.app.models.Follower;
@@ -18,19 +19,22 @@ import java.util.Optional;
 @Service
 public class UserService {
 	
-	private final UserRepository userRepository;
-	private final FollowersRepository followersRepository;
-	
 	@Autowired
-	public UserService(UserRepository userRepository, FollowersRepository followersRepository) {
-		this.userRepository = userRepository;
-		this.followersRepository = followersRepository;
+	private UserRepository userRepository;
+	@Autowired
+	private FollowersRepository followersRepository;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	
+	public UserService() {
 	}
 	
 	public User addUser(User user) {
 		if(userRepository.findByUsername(user.getUserName()) != null) {
 			return null;
 		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 	
@@ -44,16 +48,19 @@ public class UserService {
 	
 	public List<User> getUnfollowed(String userName){
 		Integer userId = getIdByUsername(userName);
-		return userRepository.getUnfollowed(userId);
+		List<User> usersFollowed = getFollowed(userId);
+		List<User> allUsers = getAllUsers();
+		List<User> unFollowed = new ArrayList<>(allUsers);
+		unFollowed.removeAll(usersFollowed);
+		return unFollowed;
 	}
 	
-	public List<User> getFollowed(String userName){
-		Integer followerId = getIdByUsername(userName);
-		List<Integer> usersId = followersRepository.getFollowed(followerId);
+	public List<User> getFollowed(Integer id){
+		List<Integer> usersIds = followersRepository.getFollowed(id);
 		List<User> users = new ArrayList<User>();
 		
-		for(Integer i : usersId) {
-			Optional<User> optUser = getUserById(i);
+		for(Integer i : usersIds) {
+			Optional<User> optUser = userRepository.findById(i);
 			User user = optUser.get();
 			if(user != null) {
 				users.add(user);
@@ -74,9 +81,14 @@ public class UserService {
 		return followersRepository.save(new Follower(followers));
 	}
 	
-
 	
+	public User getUserByUsername(String userName) {
+		return userRepository.findByUsername(userName);
+	}
 	
+	public List<User> getAllExceptCurrentUser(String userName){
+		return userRepository.getAllExceptCurrent(userName);
+	}
 	
 
 }

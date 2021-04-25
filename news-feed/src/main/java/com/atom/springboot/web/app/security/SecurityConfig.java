@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -38,11 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/","/auth/**","/app/**", "/css/**").permitAll().anyRequest().authenticated()
+		http.authorizeRequests().antMatchers("/","/auth/**", "/css/**", "/js/**","/resources/static/**","/webjars/**").permitAll().anyRequest().authenticated()
 		
 		.and().formLogin().loginPage("/auth/login").defaultSuccessUrl("/index",true).failureUrl("/auth/login?error=true")
 			  .loginProcessingUrl("/auth/login").permitAll()
-			  .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
+			  .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			  .logoutSuccessUrl("/logout.done").deleteCookies("JSESSIONID")
+			  .invalidateHttpSession(true);
+			  //.and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
 
 	}
 

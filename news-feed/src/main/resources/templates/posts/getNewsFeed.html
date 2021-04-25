@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head th:replace="fragments/head :: base_head('News Feed')">
+   <meta charset="ISO-8859-1">
+   S
+</head>
+<body th:replace="fragments/body :: body(~{::div#posts})">
+   <div id="posts">
+      
+      <div class="list-group" th:if="${posts != null}" th:each="post : ${posts}">
+      	 <h2>News Feed Post</h2>
+         <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-success" th:text="'@' + ${post.userName}"></div>
+            <div class="card-body">
+               <p class="card-text" th:text="${post.description}"></p>
+            </div>
+            <div class="card-footer bg-transparent border-success" th:text="'Created: ' + ${post.creationDate}"></div>
+         </div>
+      </div>
+      <div th:if="${posts == null}">
+         <h3>No posts available</h3>
+      </div>
+   </div>
+</body>
+</html>

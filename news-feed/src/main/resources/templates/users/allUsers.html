@@ -6,11 +6,14 @@
 <body th:replace="fragments/body :: body(~{::div#all-users})">
    <div id="all-users">
       <h2>All Users</h2>
-      <div class="list-group" th:if="${users != null}" th:each="user : ${users}">
-         <button type="button" class="list-group-item list-group-item-action" th:text="${user.userName}"></button>
+      <form th:action="@{../user/all}" method="post">
+		      <div class="list-group" th:if="${users != null}" th:each="user : ${users}">
+		      	<button type="submit" class="list-group-item list-group-item-action" th:text="${user.userName}" th:value="${user.userName}" th:name="userName"></button>
+				
+		      </div>
+	      </form>
       </div>
-      </div>
-      <div th:unless="${users == null}">
+      <div th:if="${users == null}">
          <h3>No users available</h3>
       </div>
    </div>

@@ -1,5 +1,7 @@
 package com.atom.springboot.web.app.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import com.atom.springboot.web.app.repository.PostRepository;
 @Service
 public class PostService {
 	
-private final PostRepository postRepository;
+	private final PostRepository postRepository;
 	
 	@Autowired
 	public PostService(PostRepository postRepository) {
@@ -19,6 +21,10 @@ private final PostRepository postRepository;
 	
 	public Post addPost(Post post) {
 		return postRepository.save(post);
+	}
+	
+	public List<Post> getLastTenPosts(Integer id){
+		return postRepository.getLastTenPosts(id);
 	}
 
 }

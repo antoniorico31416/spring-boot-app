@@ -12,7 +12,7 @@
 		      </div>
 	      </form>
       </div>
-      <div th:unless="${users == null}">
+      <div th:if="${users == null}">
          <h3>No users available</h3>
       </div>
    </div>

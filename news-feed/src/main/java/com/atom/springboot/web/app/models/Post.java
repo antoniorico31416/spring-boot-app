@@ -1,11 +1,17 @@
 package com.atom.springboot.web.app.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name="post")
@@ -18,16 +24,18 @@ public class Post {
 	@Column(name = "user_id")
 	private Integer userId;
 	
-	@Column(name = "content")
-	private String content; 
+	@Column(name = "userName")
+	private String userName;
 	
+	@Column(name = "content")
+	private String description; 
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date")
-	private String creationDate;
-
-	public Post(Integer id, Integer userId, String content) {
-		this.id = id;
-		this.userId = userId;
-		this.content = content;
+	private Date creationDate;
+	
+	public Post() {
 	}
 
 	public Integer getId() {
@@ -46,19 +54,27 @@ public class Post {
 		this.userId = userId;
 	}
 
-	public String getContent() {
-		return content;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getCreationDate() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(String creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	

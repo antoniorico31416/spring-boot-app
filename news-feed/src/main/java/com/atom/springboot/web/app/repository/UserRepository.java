@@ -20,8 +20,11 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Query(value="SELECT user_id FROM `user` WHERE username=?1",nativeQuery = true)
 	Integer getIdByUsername(String userName);
 	
-	@Query(value="SELECT * FROM `followers` WHERE followed=?1",nativeQuery = true)
+	@Query(value="SELECT * FROM `followers` WHERE follower=?1",nativeQuery = true)
 	List<User> getFollowed(Integer user_id);
+	
+	@Query(value="SELECT * FROM `user` WHERE username<>?1",nativeQuery = true)
+	List<User> getAllExceptCurrent(String userName);
 	
 
 }
