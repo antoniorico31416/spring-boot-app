@@ -73,13 +73,11 @@ public class PostController {
 	}
 	
 	@GetMapping("/newsFeed")
-	public String getNewsFeed(Model model, HttpSession session) {
+	public String getNewsFeed(Authentication auth, Model model, HttpSession session) {
+		String userName = auth.getName();
 		User userLogged = (User) session.getAttribute("user-entity");
 		List<Post> posts = null;
-		
-		if(userLogged != null) {
-			posts = postService.getLastTenPosts(userLogged.getId());
-		}
+		posts = postService.getLastPosts(userLogged.getId(),10);
 		
 		model.addAttribute("posts",posts);
 		return "posts/getNewsFeed";
