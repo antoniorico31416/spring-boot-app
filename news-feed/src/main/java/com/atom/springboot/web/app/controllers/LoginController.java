@@ -27,7 +27,6 @@ public class LoginController {
 	@Autowired
 	private MessageResourceImpl messageSource;
 	
-
 	public LoginController() {
 		
 	}
@@ -48,7 +47,8 @@ public class LoginController {
 			session.setAttribute("user-entity", user);
 			model.addAttribute("user",user);
 		}
-		
+		model.addAttribute("user",userName);
+			
 		return "index";
 	}
 	

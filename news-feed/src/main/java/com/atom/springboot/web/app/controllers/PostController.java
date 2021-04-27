@@ -1,7 +1,5 @@
 package com.atom.springboot.web.app.controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,9 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.ui.Model;
 
@@ -36,17 +32,12 @@ public class PostController {
 	public PostController() {
 	}
 	
-	@GetMapping("/all")
-	public String showAllPosts(Model model) {
-		//model.addAttribute("posts", );
-		return "posts/allPosts";
-	}
-	
 	@GetMapping("/create")
-	public String formPost(Model model) {
+	public String formPost(Authentication auth, Model model) {
 		Post post = new Post();
 		
 		model.addAttribute("post",post);
+		model.addAttribute("user",auth.getName());
 		return "posts/formPost";
 	}
 	
@@ -54,7 +45,6 @@ public class PostController {
 	public String createPost(Authentication auth, Post post, Model model, HttpSession session) {
 		User userLogged = (User) session.getAttribute("user-entity");
 		String userName = auth.getName();
-		//String date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date());
 		post.setUserId(userLogged.getId());
 		post.setUserName(userName);
 		Post postCreated = postService.addPost(post);
@@ -69,6 +59,7 @@ public class PostController {
 		}
 		model.addAttribute("post", post);
 		model.addAttribute("message", message);
+		model.addAttribute("user",userName);
 		return "posts/creationResult";
 	}
 	
@@ -77,7 +68,9 @@ public class PostController {
 		String userName = auth.getName();
 		User userLogged = (User) session.getAttribute("user-entity");
 		List<Post> posts = null;
+		//Get last 10 posts
 		posts = postService.getLastPosts(userLogged.getId(),10);
+		model.addAttribute("user",userName);
 		
 		model.addAttribute("posts",posts);
 		return "posts/getNewsFeed";

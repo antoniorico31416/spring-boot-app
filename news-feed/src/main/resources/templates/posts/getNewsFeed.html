@@ -16,7 +16,9 @@
             <div class="card-body">
                <p class="card-text" th:text="${post.description}"></p>
             </div>
-            <div class="card-footer bg-transparent border-success" th:text="'Created: ' + ${post.creationDate}"></div>
+            <div class="card-footer">
+		      <small class="text-muted" th:text="'Created: ' + ${post.creationDate}"></small>
+		    </div>
          </div>
       </div>
       </div>

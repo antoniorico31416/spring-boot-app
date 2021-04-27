@@ -23,33 +23,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class UserController {
 
 	// Create an instance of service
-	private final UserService userService;
+	@Autowired
+	private UserService userService;
 
 	@Autowired
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
-	
-	private String getCurrenUserName(Authentication auth, HttpSession session) {
-		String userName = auth.getName();
-		
-		if(!(auth instanceof AnonymousAuthenticationToken)) {
-			
-		}
-		
-		return userName;
-	}
-
-	@GetMapping("/all")
-	public String showAllUsers(Authentication auth, HttpSession session, Model model) {
-
-		
-		String userName = auth.getName();
-		List<User> users = userService.getAllExceptCurrentUser(userName);
-		
-		model.addAttribute("users",users);
-		
-		return "users/allUsers";
+	public UserController() {
 	}
 
 	@GetMapping("/unfollowed")
@@ -60,6 +38,7 @@ public class UserController {
 
 		}
 		model.addAttribute("users", users);
+		model.addAttribute("user",userName);
 		return "users/listUsers";
 	}
 
@@ -68,15 +47,16 @@ public class UserController {
 		String userName = auth.getName();
 		List<User> unFollowed = userService.getUnfollowed(userName);
 		model.addAttribute("users", unFollowed);
+		model.addAttribute("user",userName);
 		
-		
-		return "users/unFollowUsers";
+		return "users/followUser";
 	}
 
 	@PostMapping("/follow")
 	public String followUsers(@RequestParam(value = "userName") String userName, Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user-entity");
 		userService.followUser(user.getUserName(), userName);
+		model.addAttribute("user",user.getUserName());
 		return "index";
 	}
 
@@ -84,7 +64,7 @@ public class UserController {
 	public String followrdUsers(Authentication auth, Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user-entity");
 		List<User> users = userService.getFollowed(user.getId());
-		
+		model.addAttribute("user",auth.getName());
 
 		model.addAttribute("users", users);
 		return "users/allUsers";

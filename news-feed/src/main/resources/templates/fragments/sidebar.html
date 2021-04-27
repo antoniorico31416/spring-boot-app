@@ -5,14 +5,13 @@
 		<!-- Sidebar Holder -->
 		<nav id="sidebar" th:fragment="frag_sidebar">
 			<div class="sidebar-header">
-				<h3><a th:href="@{~/}">News Feed</a></h3>
-				<p th:if="${user != null}" th:text="'Current user: ' + ${user.userName}"> </p>
+				<h3><a th:href="@{/index}">News Feed</a></h3>
+				<p th:if="${user != null}" th:text="'Current user: ' + ${user}"> </p>
 			</div>
 
 			<ul class="list-unstyled components">
 				<li class="active"><a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Profile</a>
 					<ul class="collapse list-unstyled" th:id="homeSubmenu1">
-						<li><a th:href="@{~/app/user/all}">List Users</a></li>
 						<li><a th:href="@{~/app/user/listUnFollowed}">Follow user</a></li>
 						<li><a th:href="@{~/app/user/listFollowed}">Followed users</a></li>
 					</ul></li>
