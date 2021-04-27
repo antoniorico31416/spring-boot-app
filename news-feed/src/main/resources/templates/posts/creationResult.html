@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head th:replace="fragments/head :: base_head('News Feed')">
+   <meta charset="ISO-8859-1">
+   S
+</head>
+<body th:replace="fragments/body :: body(~{::div#posts})">
+   <div id="posts">
+      <div th:if="${post != null}" class="alert alert-success mb-3" th:text="${message}">
+      <div class="list-group">
+         <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-success" th:text="'@' + ${post.userName}"></div>
+            <div class="card-body">
+               <p class="card-text" th:text="${post.description}"></p>
+            </div>
+            <div class="card-footer bg-transparent border-success" th:text="'Created: ' + ${post.creationDate}"></div>
+         </div>
+      </div>
+      <div th:if="${post == null}" class="alert alert-danger mb-3" th:text="${message}">
+      </div>
+   </div>
+</body>
+</html>
