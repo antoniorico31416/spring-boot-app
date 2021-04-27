@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head th:replace="fragments/head :: base_head('User Creation')">
+<meta charset="ISO-8859-1">S
+</head>
+<body th:replace="fragments/body :: body(~{::div#creation-result})">
+	<div id="creation-result">
+		<h2 th:text=${message}></h2>
+		<div th:if="${user != null}">
+			<p>
+				User Id: <span th:text="${user.id}"></span>.
+			</p>
+			<p>
+				UserName: <span th:text="${user.userName}"></span>.
+			</p>
+			<p>
+				Full Name: <span th:text="${user.fullName}"></span>.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

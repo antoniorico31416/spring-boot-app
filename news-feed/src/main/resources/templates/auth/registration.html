@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head th:replace="fragments/head :: base_head('Registration')"></head>
+<body th:replace="fragments/userForms :: startPage(~{::div#registration})">
+   <div id="registration">
+   <div class="container">
+   <div th:if="${message}" class="alert alert-danger mb-3" th:text="${message}"></div>
+   
+      <h3 class="text-center text-white pt-5">Registration form</h3>
+      <div id="login-row" class="row justify-content-center align-items-center">
+         <div id="login-column" class="col-md-6">
+            <div id="login-box" class="col-md-12">
+               <form id="registration-form" th:action="@{~/auth/registration}" method="post" th:object="${user}">
+                  <div class="form-group">
+                     <label for="fullName" class="text-info">FullName:</label><br>
+                     <input type="text" class="form-control" id="fullName" th:field=*{fullName} name="fullName">
+                  </div>
+                  <div class="form-group">
+                     <label for="userName" class="text-info">Username:</label><br>
+                     <input type="text" class="form-control" id="userName" th:field=*{userName} name="userName">
+                  </div>
+                  <div class="form-group">
+                     <label for="password" class="text-info">Password:</label><br>
+                     <input type="password" class="form-control" id="password" th:field=*{password} name="password">
+                  </div>
+                  <div class="form-group">
+                     <button type="submit" class="btn btn-primary">Register</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+</html>
