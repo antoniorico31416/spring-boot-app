@@ -35,7 +35,7 @@ You have to set up some parameters in order to manage the jpa persistence module
      spring.datasource.url=jdbc:{dbms}://{db-host}:{port}/{db-name}
      spring.datasource.username={user}
      spring.datasource.password={password}
-     spring.jpa.show-sql = true
+     spring.jpa.show-sql = true //optional parameter to show executed queries 
    ```
    
    
