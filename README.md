@@ -1,6 +1,6 @@
 # News-Feed App
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://www.java.com/)
 
 Repository designed to develop Spring Application for learning purposes
 
